@@ -7,7 +7,7 @@
 ##### This data is also then saved in a .npy file to avoid repeatedly preparing the same data. Upon further use these saved files are loaded instead of preparing the full data again.
 
 ### Structure of Model
-##### The CNN model has 13 hidden layers. The input layer is a 2d convolution layer using the relu activation function. All conv2d and dense layers are using relu activation function (except the output layer) because it prevents the exponential growth in the computation required making it much more easier and faster to tune your model without compromising on accuracy/perfomance.
+##### The CNN model has 13 hidden layers. The input layer is a 2d convolution layer using the relu activation function. All conv2d and dense layers are using relu activation function (except the output layer) because it prevents the exponential growth in the computation required making it much more easier and faster to fine tune your model without compromising on accuracy/perfomance.
 
 ##### It has 5 pairs of Conv2d (of 64,64,128,128,256) and MaxPooling layers. Which are followed by a Flatten layer. This flattens the multidimensional input tensors into a single dimension. This is followed by a Dropout(rate=0.5) layer. This layer randomly sets input units to 0 with a frequency of rate at each step during training time, which helps prevent overfitting. Followed by 2 Dense layers (256, 512) and finally an output dense layer using the softmax activation function with 8 units for our 8 categories.
 
