@@ -1,3 +1,5 @@
+# RUN getData.py BEFORE RUNNING THIS
+
 import numpy as np
 import tensorflow as tf
 import os
@@ -5,7 +7,6 @@ import cv2
 import pandas as pd
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, Dense, MaxPool2D, Flatten
-from tensorflow.keras.optimizers import SGD
 
 gpus = tf.config.experimental.list_physical_devices('GPU') 
 tf.config.experimental.set_memory_growth(gpus[0], True)
@@ -16,15 +17,17 @@ labels = np.load('palm-labels.npy')
 print(labels)
 # print(photos.shape, labels.shape)
 
-model = tf.keras.models.Sequential([Conv2D(64, (3, 3), activation = 'relu', input_shape = (160, 120, 3)),
-                                    MaxPool2D(2, 2),
-                                    Conv2D(128, (3, 3), activation = 'relu'),
-                                    MaxPool2D(2, 2),
-                                    Conv2D(256, (3, 3), activation = 'relu'),
-                                    MaxPool2D(2, 2),
-                                    Flatten(),
-                                    Dense(128, activation = 'relu'),
-                                    Dense(1, activation = 'sigmoid', dtype = 'float32')])
+model = tf.keras.models.Sequential([
+  Conv2D(64, (3, 3), activation = 'relu', input_shape = (160, 120, 3)),
+  MaxPool2D(2, 2),
+  Conv2D(128, (3, 3), activation = 'relu'),
+  MaxPool2D(2, 2),
+  Conv2D(256, (3, 3), activation = 'relu'),
+  MaxPool2D(2, 2),
+  Flatten(),
+  Dense(128, activation = 'relu'),
+  Dense(1, activation = 'sigmoid', dtype = 'float32')
+])
 opt = tf.keras.optimizers.RMSprop(learning_rate=1e-4)
 model.compile(optimizer = opt, loss = 'binary_crossentropy', metrics = 'acc')
 
