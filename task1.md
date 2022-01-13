@@ -7,16 +7,16 @@
 ##### This data is also then saved in a .npy file to avoid repeatedly preparing the same data. Upon further use these saved files are loaded instead of preparing the full data again.
 
 ### Structure of Model
-##### The CNN model has 3 hidden layers. The input layer is a 2d convolution layer using the relu activation function.
+##### The CNN model has 7 hidden layers. The input layer is a 2d convolution layer using the relu activation function. All conv2d and dense layers are using relu activation function (except the output layer) because it prevents the exponential growth in the computation required making it much more easier and faster to tune your model without compromising on accuracy/perfomance.
 
-##### After that is a MaxPooling2D layer. Which is followed by a Flatten layer. This flattens the multidimensional input tensors into a single dimension. Followed by 1 Dense layer (128) and finally an output dense layer using the sigmoid activation function with 1 units for the probable category.
+##### It has 3 pairs of Conv2d (of 64,256,128) and MaxPooling layers. Which are followed by a Flatten layer flattens the multidimensional input tensors into a single dimension. This is followed by a Dropout(rate=0.5) layer. This layer randomly sets input units to 0 with a frequency of rate at each step during training time, which helps prevent overfitting. Followed by a Dense layers (128) and finally an output dense layer using the sigmoid activation function with 1 unit for our 2 categories.
 
 ### Compilation and training of model
-##### The model uses the binary_crossentropy loss function, because there are only 2 categories and it works better for this dataset.
+##### The model uses the binary_crossentropy loss function, which works better for this dataset even though the categories are mutually exclusive.
 
-##### The SGD optimizer is used with a learning rate of 1e-4 and momentum of 0.9
+##### The RMSprop optimizer function is used. RMSprop is gradient based and decreases the step/momentum for large gradients while increasing it for smaller ones. This makes sure model doesn't suffer gradient explosion and/or vanishing
 
-##### The model is then trained with around 10 epochs working best. It uses an validation split of 0.3 to make sure the model isn't overfitting
+##### The model is then trained with around 5 epochs because of the lack of time.
 
 ### Testing
 ##### The code loops over each image in the test folder and runs the prediction on it. Then stores this data in a csv with pandas library
