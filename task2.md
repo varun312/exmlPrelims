@@ -1,5 +1,5 @@
 ## Task 2
-#### For detecting company logos a CNN model with has been used with 13 hidden layers and an input size of 100x100 pictures.
+#### For detecting company logos a CNN model has been used with 13 hidden layers and an input size of 100x100 pictures.
 
 ### Preparing Data
 ##### To prepare the data loop over all folder with their name stored in an array. Then read all the files into an array of images whose shape will be (-1, 100, 100, 3). 100 is our picture size and 3 is the number of channels (RGB).
